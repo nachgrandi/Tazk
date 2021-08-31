@@ -15,8 +15,8 @@ export default class mongoDataSource implements userRepository {
   async save(user: userDto): Promise<boolean> {
     const newUser = new User(user);
     try {
-      await newUser.save();
-      return true;
+      await newUser.save()
+      return true
     } catch (error) {
       console.error(error);
       return false;
