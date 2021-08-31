@@ -35,6 +35,4 @@ jobs:
         run: npm ci
 
       - name: Run lint
-        uses: wearerequired/lint-action@v1
-        with:
-          eslint: true
+        run: npm run lint
