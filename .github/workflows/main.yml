@@ -34,7 +34,7 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Run linters
+      - name: Run lint
         uses: wearerequired/lint-action@v1
         with:
           eslint: true
