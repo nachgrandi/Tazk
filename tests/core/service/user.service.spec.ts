@@ -3,7 +3,7 @@ import createUser from '../../../src/core/service/user/user.service';
 import mongoDataSource from '../../../src/datasource/mongodb/mongodb.datasourse';
 
 const dataSource = new mongoDataSource();
-let user: UserDto = {
+const user: UserDto = {
   email: 'some@mail.com',
   showNotification: false,
   timeNotification: 0

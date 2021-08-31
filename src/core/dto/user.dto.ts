@@ -1,5 +1,5 @@
 export default interface UserDto {
-  email : String,
-  showNotification : Boolean,
-  timeNotification : Number
+  email: string,
+  showNotification: boolean,
+  timeNotification: number
 }

@@ -4,7 +4,7 @@ import User from './models/user.model';
 
 export default class mongoDataSource implements userRepository {
 
-  async getByEmail(email: String): Promise<userDto | null> {
+  async getByEmail(email: string): Promise<userDto | null> {
     const user = await User.findOne({ email: email });
     if (user) {
       return user;
@@ -12,7 +12,7 @@ export default class mongoDataSource implements userRepository {
     return null;
   }
 
-  async save(user: userDto): Promise<Boolean> {
+  async save(user: userDto): Promise<boolean> {
     const newUser = new User(user);
     try {
       await newUser.save();
