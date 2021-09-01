@@ -1,5 +1,7 @@
-export default interface UserDto {
-  email : String,
-  showNotification : Boolean,
-  timeNotification : Number
+interface UserDto {
+  email: string
+  showNotification: boolean
+  timeNotification: number
 }
+
+export default UserDto;

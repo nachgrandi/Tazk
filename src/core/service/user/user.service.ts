@@ -1,6 +1,6 @@
 
-import UserDto from "../../dto/user.dto";
-import UserRepository from "../../repository/user.repository";
+import UserDto from '../../dto/user.dto';
+import UserRepository from '../../repository/user.repository';
 
 const createUser = ( userRepository : UserRepository ) => async ( 
   userToCreate : UserDto 
@@ -11,6 +11,6 @@ const createUser = ( userRepository : UserRepository ) => async (
     return false;
 
   return userRepository.save(userToCreate);
-}
+};
 
 export default createUser;

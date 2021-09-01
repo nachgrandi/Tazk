@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
@@ -18,7 +18,7 @@ app.use(express.json());
 //routes
 app.get('/', (req, res) => {
   return res.send(`The API is at http://localhost:${app.get('port')}`);
-})
+});
 
 app.use(userRoutes);
 

@@ -1,7 +1,7 @@
-import { model, Schema, Document } from "mongoose";
-import UserDto from "../../../core/dto/user.dto";
+import { model, Schema, Document } from 'mongoose';
+import UserDto from '../../../core/dto/user.dto';
 
-export interface IUser extends Document, UserDto {};
+export interface IUser extends Document, UserDto {}
 
 const userSchema = new Schema({
   email: {
@@ -21,4 +21,4 @@ const userSchema = new Schema({
   }
 });
 
-export default model<IUser>("User", userSchema);
+export default model<IUser>('User', userSchema);
