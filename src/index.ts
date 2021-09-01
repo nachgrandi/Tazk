@@ -1,4 +1,4 @@
-import app from './app'
+import app from './app';
 import './database/mongodb.database';
 
 app.listen(app.get('port'));

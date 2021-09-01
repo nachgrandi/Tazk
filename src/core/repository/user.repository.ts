@@ -1,7 +1,8 @@
-import UserDto from "../dto/user.dto";
+import UserDto from '../dto/user.dto';
 
-
-export default interface UserRepository {
-  getByEmail(email : string) : Promise<UserDto | null>;
-  save(user : UserDto) : Promise<boolean>;
+interface UserRepository {
+  getByEmail(email : string) : Promise<UserDto | null>
+  save(user : UserDto) : Promise<boolean>
 }
+
+export default UserRepository;

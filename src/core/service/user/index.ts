@@ -1,5 +1,5 @@
-import mongoDataSource from "../../../datasource/mongodb/mongodb.datasourse";
-import createUser from "./user.service";
+import mongoDataSource from '../../../datasource/mongodb/mongodb.datasourse';
+import createUser from './user.service';
 
 const userRepository = new mongoDataSource();
 

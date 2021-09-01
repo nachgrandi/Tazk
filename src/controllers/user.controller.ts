@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import UserService from "../core/service/user/index";
+import { Request, Response } from 'express';
+import UserService from '../core/service/user/index';
 
 export const signUp = async (
   req: Request,
@@ -8,16 +8,16 @@ export const signUp = async (
   if (!req.body.email) {
     return res
       .status(400)
-      .json({ msg: "Email not found." });
+      .json({ msg: 'Email not found.' });
   }
 
-  const isCreated = await UserService.createUser(req.body)
+  const isCreated = await UserService.createUser(req.body);
 
   if (!isCreated) {
     return res
       .status(500)
-      .json({ msg: "A problem occurred trying to create the user." });
+      .json({ msg: 'A problem occurred trying to create the user.' });
   }
 
-  return res.status(201).json({ msg: "User created successfully." });
+  return res.status(201).json({ msg: 'User created successfully.' });
 };

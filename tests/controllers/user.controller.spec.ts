@@ -1,6 +1,6 @@
-import { signUp } from "../../src/controllers/user.controller";
-import { getMockReq, getMockRes } from '@jest-mock/express'
-import UserService from "../../src/core/service/user/index";
+import { signUp } from '../../src/controllers/user.controller';
+import { getMockReq, getMockRes } from '@jest-mock/express';
+import UserService from '../../src/core/service/user/index';
 
 describe('POST - Create user', () => {
   test('Test create user successfully', async () => {
@@ -8,7 +8,7 @@ describe('POST - Create user', () => {
     const req = getMockReq({
       body: { email: 'some@email.com' }
     });
-    const { res } = getMockRes()
+    const { res } = getMockRes();
 
     await signUp(req, res).then(
       (r) => {
@@ -18,7 +18,7 @@ describe('POST - Create user', () => {
           }),
         );
       }
-    )
+    );
   });
 
   test('Test create user fails trying to save user', async () => {
@@ -26,7 +26,7 @@ describe('POST - Create user', () => {
     const req = getMockReq({
       body: { email: 'some@email.com' }
     });
-    const { res } = getMockRes()
+    const { res } = getMockRes();
 
     await signUp(req, res).then(
       (r) => {
@@ -36,7 +36,7 @@ describe('POST - Create user', () => {
           }),
         );
       }
-    )
+    );
   });
 
   test('Test create user fails for empty email', async () => {
@@ -44,7 +44,7 @@ describe('POST - Create user', () => {
     const req = getMockReq({
       body: {}
     });
-    const { res } = getMockRes()
+    const { res } = getMockRes();
 
     await signUp(req, res).then(
       (r) => {
@@ -54,6 +54,6 @@ describe('POST - Create user', () => {
           }),
         );
       }
-    )
+    );
   });
 });

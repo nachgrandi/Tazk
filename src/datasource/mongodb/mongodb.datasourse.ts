@@ -1,5 +1,5 @@
 import userDto from '../../core/dto/user.dto';
-import userRepository from '../../core/repository/user.repository'
+import userRepository from '../../core/repository/user.repository';
 import User from './models/user.model';
 
 export default class mongoDataSource implements userRepository {
@@ -15,7 +15,7 @@ export default class mongoDataSource implements userRepository {
   async save(user: userDto): Promise<boolean> {
     const newUser = new User(user);
     try {
-      await newUser.save()
+      await newUser.save();
       return true;
     } catch (error) {
       console.error(error);
