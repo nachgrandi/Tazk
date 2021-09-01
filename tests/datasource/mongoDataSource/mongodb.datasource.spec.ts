@@ -29,14 +29,14 @@ describe('UserDataSource - ', () => {
       .mockImplementationOnce(() => Promise.resolve());
     
     const result = await dataSource.save(user);
-    expect(result).toBeTruthy;
+    expect(result).toBe(true);
   });
 
   test('Test fail to save user', async () => {
     jest.spyOn(User.prototype, 'save')
-      .mockImplementationOnce(() => Promise.reject());
+      .mockImplementationOnce(() => Promise.reject('Error'));
     
     const result = await dataSource.save(user);
-    expect(result).toBeFalsy;
+    expect(result).toBe(false);
   });
 });
