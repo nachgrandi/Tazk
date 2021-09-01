@@ -10,6 +10,7 @@ const createUser = ( userRepository : UserRepository ) => async (
   if (user)
     return false;
 
+  console.log('prueba');
   return userRepository.save(userToCreate);
 };
 
