@@ -37,6 +37,6 @@ describe('UserDataSource - ', () => {
       .mockImplementationOnce(() => Promise.reject());
     
     const result = await dataSource.save(user);
-    expect(result).toBeFalsy;
+    expect(result).toBeTruthy;
   });
 });
