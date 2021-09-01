@@ -34,7 +34,7 @@ describe('UserDataSource - ', () => {
 
   test('Test fail to save user', async () => {
     jest.spyOn(User.prototype, 'save')
-      .mockImplementationOnce(() => Promise.reject("Error"));
+      .mockImplementationOnce(() => Promise.reject('Error'));
     
     const result = await dataSource.save(user);
     expect(result).toBe(false);
