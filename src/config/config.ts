@@ -1,8 +1,11 @@
-export default {
-  jwtSecret: process.env.JWT_SECRET || 'somesecrettoken',
-  DB: {
-    URI: process.env.MONGODB_URI || 'mongodb://localhost/tazk',
-    USER: process.env.MONGODB_USER,
-    PASSWORD: process.env.MONGODB_PASSWORD
-  }
-};
+import develop from './develop';
+import prod from './prod';
+
+const configs: any = {
+  dev: develop,
+  prod: prod
+}
+
+const environment: string = process.env.NODE_ENV || 'dev';
+
+export = configs[environment] || develop;
