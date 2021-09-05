@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import config from '../config/config';
-import dbOptions from '../config/mongodb.config';
 
-mongoose.connect(config.DB.URI, dbOptions);
+mongoose.connect(config.DB.URI);
 
 const connection = mongoose.connection;
 
