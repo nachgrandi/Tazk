@@ -17,16 +17,14 @@ export const createUser = ( userRepository : UserRepository ) => async (
 
 export const authUser = ( userRepository : UserRepository ) => async ( 
   email : string,
-  googleId: string 
 ) => {
 
   const user: UserDto | null = await userRepository.getByEmail( email );
 
   if (user) {
-    return userRepository.auth( user.email, googleId );
+    return userRepository.auth( user.email );
   }
 
   return false;
   
 };
-

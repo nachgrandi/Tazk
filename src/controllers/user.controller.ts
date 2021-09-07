@@ -43,7 +43,7 @@ export const auth = async (
       .json({ msg: 'Google ID not found.' });
   }
 
-  const isUser = await UserService.authUser( req.body.email, req.body.googleId );
+  const isUser = await UserService.authUser( req.body.email );
 
   if (!isUser) {
     return res
@@ -52,8 +52,8 @@ export const auth = async (
   }
 
   const payload = { email: req.body.email, googleId: req.body.googleId };
-  const privateKey : any = fs.readFileSync( './keys/private.pem', 'utf-8' );
-  const signOptions : any = { expiresIn: '8h', algorithm: 'RS256'};
+  const privateKey : string = fs.readFileSync( './keys/private.pem', 'utf-8' );
+  const signOptions : any = { algorithm: 'RS256'};
 
   const token : string = jwt.sign( payload, privateKey, signOptions );
 
