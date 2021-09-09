@@ -1,6 +1,7 @@
 import UserDto from '../../../src/core/dto/user.dto';
-import createUser from '../../../src/core/service/user/user.service';
+import { createUser, singIn } from '../../../src/core/service/user/user.service';
 import mongoDataSource from '../../../src/datasource/mongodb/mongodb.datasourse';
+import ElementNotFoundError from '../../../src/errors/elementNotFoundError';
 
 const dataSource = new mongoDataSource();
 const user: UserDto = {
@@ -9,8 +10,9 @@ const user: UserDto = {
   timeNotification: 0
 };
 const createUserService = createUser(dataSource);
+const singInService = singIn(dataSource);
 
-describe('UserService - ', () => {
+describe('UserService - singUp', () => {
   test('Test create user successfully', async () => {
     dataSource.save = jest.fn().mockReturnValue(true);
     dataSource.getByEmail = jest.fn().mockReturnValue(null);
@@ -21,5 +23,13 @@ describe('UserService - ', () => {
     dataSource.getByEmail = jest.fn().mockReturnValue(user);
     const result = await createUserService(user);
     expect(result).toBe(false);
+  });
+});
+
+describe('UserService - singIn', () => {
+  test('Test sing in successfully', async () => {
+    dataSource.getByEmail = jest.fn().mockReturnValue(user);
+    const result = await singInService(user.email);
+    expect(result).toBeDefined;
   });
 });

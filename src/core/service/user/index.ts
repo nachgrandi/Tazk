@@ -3,12 +3,12 @@ import mongoDataSource from '../../../datasource/mongodb/mongodb.datasourse';
 
 import {
   createUser,
-  authUser
+  singIn
 } from './user.service';
 
 const userRepository = new mongoDataSource();
 
 export default class UserService {
   static createUser = createUser(userRepository);
-  static authUser = authUser(userRepository);
+  static singIn = singIn(userRepository);
 }

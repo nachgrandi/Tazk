@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import fs from 'fs';
-import jwt from 'jsonwebtoken';
 import UserService from '../core/service/user/index';
+import ElementNotFoundError from '../errors/elementNotFoundError';
 
 export const signUp = async (
   req: Request,
@@ -26,7 +25,7 @@ export const signUp = async (
 
 };
 
-export const auth = async (
+export const singIn = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
@@ -37,26 +36,25 @@ export const auth = async (
       .json({ msg: 'Email not found.' });
   }
 
-  if (!req.body.googleId) {
-    return res
-      .status(400)
-      .json({ msg: 'Google ID not found.' });
-  }
+  try {
+    const jwt = await UserService.singIn( req.body.email );
 
-  const isUser = await UserService.authUser( req.body.email );
+    return res.status(201).json({ msg: 'User authenticated successfully.', jwt });
+  } catch (e) {
 
-  if (!isUser) {
+    if (e instanceof ElementNotFoundError) {
+      return res
+        .status(e.statusCode)
+        .json({ msg: e.message });
+    }
+
     return res
       .status(500)
       .json({ msg: 'A problem occurred trying to authenticate the user.' });
   }
 
-  const payload = { email: req.body.email, googleId: req.body.googleId };
-  const privateKey : string = fs.readFileSync( './keys/private.pem', 'utf-8' );
-  const signOptions : any = { algorithm: 'RS256'};
+  
 
-  const token : string = jwt.sign( payload, privateKey, signOptions );
-
-  return res.status(201).json({ msg: 'User authenticated successfully.', token });
+  
 
 };

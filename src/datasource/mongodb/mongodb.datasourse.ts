@@ -23,14 +23,4 @@ export default class mongoDataSource implements userRepository {
     }
   }
 
-  async auth(email: string): Promise<any> {
-    const user = await User.findOne({ email: email });
-    try {
-      return true;
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  }
-
 }
