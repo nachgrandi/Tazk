@@ -1,11 +1,11 @@
-import BaseError from "./baseError"
+import BaseError from './baseError';
 
 class ElementNotFoundError extends BaseError {
   constructor (
     statusCode = 401,
     description = 'Element not found.',
   ) {
-    super(statusCode, description)
+    super(statusCode, description);
   }
 }
 

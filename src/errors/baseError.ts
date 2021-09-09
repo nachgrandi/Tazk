@@ -3,7 +3,7 @@ class BaseError extends Error {
   statusCode: number;
 
   constructor (statusCode: number, description: string) {
-    super(description)
+    super(description);
   
     Object.setPrototypeOf(this, new.target.prototype);
     this.statusCode = statusCode;
@@ -11,4 +11,4 @@ class BaseError extends Error {
   }
  }
  
- export default BaseError
+ export default BaseError;
