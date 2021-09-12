@@ -1,12 +1,12 @@
 
-import mongoDataSource from '../../../datasource/mongodb/mongodb.datasourse';
+import userMongoDataSource from '../../../datasource/mongodb/user.mongodb.datasourse';
 
 import {
   createUser,
   singIn
 } from './user.service';
 
-const userRepository = new mongoDataSource();
+const userRepository = new userMongoDataSource();
 
 export default class UserService {
   static createUser = createUser(userRepository);
