@@ -5,8 +5,12 @@ export const createTask = ( taskRepository: TaskRepository ) => async (
   taskToCreate: TaskDto 
 ) => {
 
-  return taskRepository.save(taskToCreate);
+  const res = await taskRepository.save(taskToCreate);
+
+  if ( !res )
+    throw new Error('An error occurred trying to create the task.');
   
+  return;
 };
 
 export const getByDateRange = ( taskRepository: TaskRepository ) => async ( 
@@ -20,8 +24,13 @@ export const getByDateRange = ( taskRepository: TaskRepository ) => async (
 export const updateTask = ( taskRepository: TaskRepository ) => async ( 
   taskToCreate: TaskDto, id: string
 ) => {
+
+  const res = await taskRepository.update(taskToCreate, id);
+
+  if ( !res )
+    throw new Error('An error occurred trying to update the task.');
   
-  return taskRepository.update(taskToCreate, id);
+  return;
   
 };
 
@@ -29,6 +38,11 @@ export const deleteTask = ( taskRepository: TaskRepository ) => async (
   id: string 
 ) => {
 
-  return taskRepository.delete(id);
+  const res = await taskRepository.delete(id);
+
+  if ( !res )
+    throw new Error('An error occurred trying to delete the task.');
+  
+  return;
   
 };

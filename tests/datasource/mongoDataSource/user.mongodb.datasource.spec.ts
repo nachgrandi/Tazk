@@ -1,6 +1,6 @@
 import UserDto from '../../../src/core/dto/user.dto';
 import User from '../../../src/datasource/mongodb/models/user.model';
-import mongoDataSource from '../../../src/datasource/mongodb/mongodb.datasourse';
+import mongoDataSource from '../../../src/datasource/mongodb/user.mongodb.datasourse';
 
 const dataSource = new mongoDataSource();
 const user: UserDto = {

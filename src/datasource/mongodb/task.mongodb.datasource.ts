@@ -7,6 +7,7 @@ export default class mongoDataSource implements TaskRepository {
  
   async getByDateRange(email: string, startDate: Date, endDate: Date): Promise<TaskDto[] | null> {
     
+    try {
       const tasks = Task.find(
         {
           email: email,
@@ -16,11 +17,16 @@ export default class mongoDataSource implements TaskRepository {
           }
         }
       );
-
-      if (tasks) 
+      
+      if (tasks !== null ) 
         return tasks;
       
       return null;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+      
   }
 
   async save (task: TaskDto): Promise<boolean> {

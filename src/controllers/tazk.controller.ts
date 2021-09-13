@@ -14,7 +14,7 @@ export const create = async (
   }
 
   try {
-    TaskService.createTask(req.body);
+    await TaskService.createTask(req.body);
 
     return res.status(201).json({ msg: 'Task created successfully.' });
   } catch (err) {
@@ -49,7 +49,7 @@ export const getByDateRange = async (
   } catch (err) {
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to create the task.' });
+      .json({ msg: 'A problem occurred trying to get tasks.' });
   }
 };
 
@@ -65,13 +65,13 @@ export const update = async (
   }
 
   try {
-    TaskService.updateTask(req.body, req.body._id);
+    await TaskService.updateTask(req.body, req.body._id);
 
-    return res.status(201).json({ msg: 'Task created successfully.' });
+    return res.status(201).json({ msg: 'Task updated successfully.' });
   } catch (err) {
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to create the task.' });
+      .json({ msg: 'A problem occurred trying to update the task.' });
   }
 };
 
@@ -88,13 +88,13 @@ export const deleteTask = async (
 
   try {
     const id: string = params.id as string;
-    TaskService.deleteTask(id);
+    await TaskService.deleteTask(id);
 
     return res.status(201).json({ msg: 'Task deleted successfully.' });
   } catch (err) {
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to create the task.' });
+      .json({ msg: 'A problem occurred trying to delete the task.' });
   }
 };
 
