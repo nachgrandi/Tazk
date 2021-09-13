@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import userRoutes from './routes/users.routes';
+import taskRoutes from './routes/tasks.routes';
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.get('/', (req, res) => {
 });
 
 app.use(userRoutes);
+app.use(taskRoutes);
 
 export default app;

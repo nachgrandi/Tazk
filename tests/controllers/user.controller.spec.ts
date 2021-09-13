@@ -79,6 +79,7 @@ describe('POST - SingIn', () => {
   });
 
   test('Test sing in user fails for empty email', async () => {
+    UserService.singIn = jest.fn().mockReturnValue('somejwt');
     const req = getMockReq({
       body: {}
     });

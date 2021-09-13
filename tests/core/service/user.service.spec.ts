@@ -1,7 +1,6 @@
 import UserDto from '../../../src/core/dto/user.dto';
 import { createUser, singIn } from '../../../src/core/service/user/user.service';
-import mongoDataSource from '../../../src/datasource/mongodb/mongodb.datasourse';
-import ElementNotFoundError from '../../../src/errors/elementNotFoundError';
+import mongoDataSource from '../../../src/datasource/mongodb/user.mongodb.datasourse';
 
 const dataSource = new mongoDataSource();
 const user: UserDto = {
