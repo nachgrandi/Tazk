@@ -2,7 +2,7 @@ import BaseError from './baseError';
 
 class ElementNotFoundError extends BaseError {
   constructor (
-    statusCode = 401,
+    statusCode = 404,
     description = 'Element not found.',
   ) {
     super(statusCode, description);

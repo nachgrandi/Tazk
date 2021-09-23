@@ -5,12 +5,12 @@ import Task from './models/task.model';
 export default class mongoDataSource implements TaskRepository {
 
  
-  async getByDateRange(email: string, startDate: Date, endDate: Date): Promise<TaskDto[] | null> {
+  async getByDateRange(userId: string, startDate: Date, endDate: Date): Promise<TaskDto[] | null> {
     
     try {
       const tasks = Task.find(
         {
-          email: email,
+          userId: userId,
           dateCreated: { 
             $gte: startDate, 
             $lte: endDate 
@@ -18,7 +18,7 @@ export default class mongoDataSource implements TaskRepository {
         }
       );
       
-      if (tasks !== null ) 
+      if (tasks) 
         return tasks;
       
       return null;

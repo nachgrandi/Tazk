@@ -1,9 +1,17 @@
 import TaskDto from '../../dto/task.dto';
 import TaskRepository from '../../repository/task.repository';
+import UserRepository from '../../repository/user.repository';
 
-export const createTask = ( taskRepository: TaskRepository ) => async ( 
-  taskToCreate: TaskDto 
+export const createTask = ( 
+  taskRepository: TaskRepository,
+  userRepository: UserRepository
+) => async ( 
+  taskToCreate: TaskDto,
+  email: string
 ) => {
+  const userId = await userRepository.getIdByEmail(email);
+
+  taskToCreate.userId = userId
 
   const res = await taskRepository.save(taskToCreate);
 
@@ -13,11 +21,15 @@ export const createTask = ( taskRepository: TaskRepository ) => async (
   return;
 };
 
-export const getByDateRange = ( taskRepository: TaskRepository ) => async ( 
+export const getByDateRange = ( 
+  taskRepository: TaskRepository,
+  userRepository: UserRepository
+) => async ( 
   email: string, startDate: Date, endDate: Date
 ) => {
+  const userId = await userRepository.getIdByEmail(email);
   
-  return taskRepository.getByDateRange(email, startDate, endDate);
+  return taskRepository.getByDateRange(userId, startDate, endDate);
   
 };
 

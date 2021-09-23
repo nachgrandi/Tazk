@@ -14,7 +14,7 @@ export const create = async (
   }
 
   try {
-    await TaskService.createTask(req.body);
+    await TaskService.createTask(req.body, res.locals.userEmail);
 
     return res.status(201).json({ msg: 'Task created successfully.' });
   } catch (err) {
@@ -29,14 +29,14 @@ export const getByDateRange = async (
   res: Response
 ): Promise<Response> => {
   const params = req.query;
-  if (!params || !params.email || !params.startDate || !params.endDate)
+  if (!params || !params.startDate || !params.endDate)
     return res
       .status(400)
       .json({ msg: 'The params email, start date and end date are necesary.' });
 
   
   try {
-    const email: string = params.email as string;
+    const email: string = res.locals.userEmail;
     const startDate: Date = params.startDate as unknown as Date;
     const endDate: Date = params.endDate as unknown as Date;
     const data = await TaskService.getByDateRange(email, startDate, endDate);
@@ -100,7 +100,7 @@ export const deleteTask = async (
 
 const isBodyValid = (tazk: TaskDto) => {
 
-  if (!tazk.email || !tazk.title || !tazk.dateCreated) {
+  if (!tazk.title || !tazk.dateCreated) {
     return false;
   }
 

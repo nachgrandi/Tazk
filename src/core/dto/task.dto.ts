@@ -1,5 +1,5 @@
 interface TaskDto {
-  email: string
+  userId: string
   dateCreated: Date
   title: string
   description: string

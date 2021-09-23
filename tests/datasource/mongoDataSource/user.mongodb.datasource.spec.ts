@@ -24,6 +24,21 @@ describe('UserDataSource - ', () => {
     expect(result).toBe(null);
   });
 
+  test('Test find id user successfully', async () => {
+    const testUser = new User(user);
+    User.findOne = jest.fn().mockReturnValue(testUser);
+    
+    const result = await dataSource.getIdByEmail(user.email);
+    expect(result).toBe(testUser._id);
+  });
+
+  test('Test fail to find id user', async () => {
+    User.findOne = jest.fn().mockReturnValue(null);
+    
+    const result = await dataSource.getByEmail(user.email);
+    expect(result).toBe(null);
+  });
+
   test('Test save user successfully', async () => {
     jest.spyOn(User.prototype, 'save')
       .mockImplementationOnce(() => Promise.resolve());
