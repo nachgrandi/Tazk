@@ -6,7 +6,7 @@ import mongoDataSource from '../../../src/datasource/mongodb/task.mongodb.dataso
 const dataSource = new mongoDataSource();
 const task: TaskDto = {
   title: 'some title',
-  email: 'some@email.com',
+  userId: '123123',
   dateCreated: new Date('2021-01-01'),
   description: ''
 };
@@ -80,7 +80,6 @@ describe('TaskDataSource - ', () => {
     });
     
     const result = await dataSource.getByDateRange('some@email.com', new Date(), new Date());
-    console.log('resuly', result);
     expect(result).toBe(null);
   });
 });

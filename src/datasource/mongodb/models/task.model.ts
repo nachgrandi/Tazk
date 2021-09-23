@@ -4,7 +4,7 @@ import TaskDto from '../../../core/dto/task.dto';
 export interface ITask extends Document, TaskDto {}
 
 const taskSchema = new Schema({
-  email: {
+  userId: {
     type: String,
     required: true,
     lowercase: true,

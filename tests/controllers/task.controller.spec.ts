@@ -8,12 +8,15 @@ describe('POST - Create', () => {
     TaskService.createTask = jest.fn().mockReturnValue(true);
     const req = getMockReq({
       body: { 
-        email: 'some@email.com',
         title: 'some title',
         dateCreated: '2021-01-01'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await create(req, res).then(
       (r) => {
@@ -30,12 +33,15 @@ describe('POST - Create', () => {
     TaskService.createTask = jest.fn().mockRejectedValue(new Error(''));
     const req = getMockReq({
       body: { 
-        email: 'some@email.com',
         title: 'some title',
         dateCreated: '2021-01-01'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await create(req, res).then(
       (r) => {
@@ -53,7 +59,11 @@ describe('POST - Create', () => {
     const req = getMockReq({
       body: {}
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await create(req, res).then(
       (r) => {
@@ -73,12 +83,15 @@ describe('PUT - Update', () => {
     const req = getMockReq({
       body: { 
         _id: 'aAbBcC123',
-        email: 'some@email.com',
         title: 'some title',
         dateCreated: '2021-01-01'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await update(req, res).then(
       (r) => {
@@ -96,12 +109,15 @@ describe('PUT - Update', () => {
     const req = getMockReq({
       body: { 
         _id: 'aAbBcC123',
-        email: 'some@email.com',
         title: 'some title',
         dateCreated: '2021-01-01'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await update(req, res).then(
       (r) => {
@@ -119,7 +135,11 @@ describe('PUT - Update', () => {
     const req = getMockReq({
       body: {}
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await update(req, res).then(
       (r) => {
@@ -137,7 +157,7 @@ describe('GET - getByDateRange', () => {
   test('Test get task successfully', async () => {
     const data: TaskDto = {
       title: 'some title',
-      email: 'some@email.com',
+      userId: '123123',
       dateCreated: new Date('2021-01-01'),
       description: ''
     };
@@ -146,12 +166,15 @@ describe('GET - getByDateRange', () => {
 
     const req = getMockReq({
       query: { 
-        email: 'some@email.com',
         startDate: '2021-01-01',
         endDate: '2021-01-02'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await getByDateRange(req, res).then(
       (r) => {
@@ -168,12 +191,15 @@ describe('GET - getByDateRange', () => {
     TaskService.getByDateRange = jest.fn().mockRejectedValue(new Error(''));
     const req = getMockReq({
       query: { 
-        email: 'some@email.com',
         startDate: '2021-01-01',
         endDate: '2021-01-02'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await getByDateRange(req, res).then(
       (r) => {
@@ -191,7 +217,11 @@ describe('GET - getByDateRange', () => {
     const req = getMockReq({
       query: {}
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await getByDateRange(req, res).then(
       (r) => {
@@ -213,7 +243,11 @@ describe('DELETE - Delete', () => {
         id: 'aAbBcC123'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await deleteTask(req, res).then(
       (r) => {
@@ -233,7 +267,11 @@ describe('DELETE - Delete', () => {
         id: 'aAbBcC123'
       }
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await deleteTask(req, res).then(
       (r) => {
@@ -251,7 +289,11 @@ describe('DELETE - Delete', () => {
     const req = getMockReq({
       params: {}
     });
-    const { res } = getMockRes();
+    const { res } = getMockRes({
+      locals: {
+        userEmail: 'test@test.com'
+      }
+    });
 
     await deleteTask(req, res).then(
       (r) => {
