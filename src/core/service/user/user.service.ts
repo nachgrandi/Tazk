@@ -10,7 +10,7 @@ export const signInOrSignUp = ( userRepository : UserRepository ) => async (
     email,
     showNotification: false,
     timeNotification: 0
-  }
+  };
 
   const user: UserDto | null = await userRepository.getByEmail( userToCreate.email );
 

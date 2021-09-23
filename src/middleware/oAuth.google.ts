@@ -15,7 +15,7 @@ export const oAuth =  async (
     if (!req.headers || !req.headers.idtoken || !(typeof req.headers.idtoken === 'string') )
       throw new UnauthorizedError();
 
-    let idToken: string = req.headers.idtoken;
+    const idToken: string = req.headers.idtoken;
 
     const ticket = await client.verifyIdToken({
         idToken: idToken,
@@ -33,7 +33,7 @@ export const oAuth =  async (
 
     next();
   } catch (error) {
-    console.error(error)
+    console.error(error);
     if (error instanceof UnauthorizedError) {
       return res
         .status(error.statusCode)
@@ -46,4 +46,4 @@ export const oAuth =  async (
       .status(500)
       .json({ msg: 'A problem occurred trying to authenticate the user.' });
   }
-}
+};

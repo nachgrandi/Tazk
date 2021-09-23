@@ -11,7 +11,7 @@ export const createTask = (
 ) => {
   const userId = await userRepository.getIdByEmail(email);
 
-  taskToCreate.userId = userId
+  taskToCreate.userId = userId;
 
   const res = await taskRepository.save(taskToCreate);
 

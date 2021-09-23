@@ -11,7 +11,7 @@ const task: TaskDto = {
   dateCreated: new Date('2021-01-01'),
   description: ''
 };
-const email:string = 'test@test.com'
+const email = 'test@test.com';
 
 class service {
   static createTask = createTask(dataSource, userDataSource)
