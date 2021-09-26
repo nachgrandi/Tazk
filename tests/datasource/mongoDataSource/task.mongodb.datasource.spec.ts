@@ -8,7 +8,8 @@ const task: TaskDto = {
   title: 'some title',
   userId: '123123',
   dateCreated: new Date('2021-01-01'),
-  description: ''
+  description: '',
+  category: 'error'
 };
 
 describe('TaskDataSource - ', () => {
@@ -80,6 +81,30 @@ describe('TaskDataSource - ', () => {
     });
     
     const result = await dataSource.getByDateRange('some@email.com', new Date(), new Date());
+    expect(result).toBe(null);
+  });
+  test('Test get task with category successfully', async () => {
+
+    Task.find = jest.fn().mockResolvedValue([task]);
+    
+    const result = await dataSource.getByDateRangeAndCategory('some@email.com', new Date(), new Date(), 'error');
+    expect(result).toStrictEqual([task]);
+  });
+
+  test('Test get task successfully but is null', async () => {
+
+    Task.find = jest.fn().mockResolvedValue(null);
+    
+    const result = await dataSource.getByDateRangeAndCategory('some@email.com', new Date(), new Date(), 'error');
+    expect(result).toBe(null);
+  });
+
+  test('Test fail to get task', async () => {
+    Task.find = jest.fn().mockImplementation(() => {
+      throw new Error();
+    });
+    
+    const result = await dataSource.getByDateRangeAndCategory('some@email.com', new Date(), new Date(), 'error');
     expect(result).toBe(null);
   });
 });

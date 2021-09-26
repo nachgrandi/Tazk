@@ -25,10 +25,13 @@ export const getByDateRange = (
   taskRepository: TaskRepository,
   userRepository: UserRepository
 ) => async ( 
-  email: string, startDate: Date, endDate: Date
+  email: string, startDate: Date, endDate: Date, category: string | null
 ) => {
   const userId = await userRepository.getIdByEmail(email);
   
+  if (category)
+    return taskRepository.getByDateRangeAndCategory(userId, startDate, endDate, category);
+
   return taskRepository.getByDateRange(userId, startDate, endDate);
   
 };

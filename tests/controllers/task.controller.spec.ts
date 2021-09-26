@@ -159,7 +159,8 @@ describe('GET - getByDateRange', () => {
       title: 'some title',
       userId: '123123',
       dateCreated: new Date('2021-01-01'),
-      description: ''
+      description: '',
+      category: 'error'
     };
 
     TaskService.getByDateRange = jest.fn().mockReturnValue(data);

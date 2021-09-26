@@ -39,7 +39,8 @@ export const getByDateRange = async (
     const email: string = res.locals.userEmail;
     const startDate: Date = params.startDate as unknown as Date;
     const endDate: Date = params.endDate as unknown as Date;
-    const data = await TaskService.getByDateRange(email, startDate, endDate);
+    const category: string | null = params.category ? params.category as string : null;
+    const data = await TaskService.getByDateRange(email, startDate, endDate, category);
 
     return res
       .status(201)

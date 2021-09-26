@@ -25,6 +25,12 @@ const taskSchema = new Schema({
   dateCreated: {
     type: Date,
     required: true
+  },
+  category: {
+    type: String,
+    required: false,
+    lowercase: false,
+    trim: false
   }
 });
 
