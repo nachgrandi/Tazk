@@ -29,6 +29,31 @@ export default class mongoDataSource implements TaskRepository {
       
   }
 
+  async getByDateRangeAndCategory(userId: string, startDate: Date, endDate: Date, category: string): Promise<TaskDto[] | null> {
+    
+    try {
+      const tasks = Task.find(
+        {
+          userId: userId,
+          dateCreated: { 
+            $gte: startDate, 
+            $lte: endDate 
+          },
+          category: category
+        }
+      );
+      
+      if (tasks) 
+        return tasks;
+      
+      return null;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+      
+  }
+
   async save (task: TaskDto): Promise<boolean> {
     const newTask = new Task(task);
     try {

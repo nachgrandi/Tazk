@@ -9,7 +9,8 @@ const task: TaskDto = {
   title: 'some title',
   userId: '123123',
   dateCreated: new Date('2021-01-01'),
-  description: ''
+  description: '',
+  category: 'error'
 };
 const email = 'test@test.com';
 
@@ -75,13 +76,13 @@ describe('TaskService - getByDateRange', () => {
   test('Test get tasks successfully', async () => {
     dataSource.getByDateRange = jest.fn().mockReturnValue([task]);
     userDataSource.getIdByEmail = jest.fn().mockReturnValue('123123');
-    const result = await service.getByDateRange('some@email.com', new Date(), new Date());
+    const result = await service.getByDateRange('some@email.com', new Date(), new Date(), null);
     expect(result).toStrictEqual([task]);
   });
   test('Test get tasks fail', async () => {
-    dataSource.getByDateRange = jest.fn().mockReturnValue(null);
+    dataSource.getByDateRangeAndCategory = jest.fn().mockReturnValue(null);
     userDataSource.getIdByEmail = jest.fn().mockReturnValue('123123');
-    const result = await service.getByDateRange('some@email.com', new Date(), new Date());
+    const result = await service.getByDateRange('some@email.com', new Date(), new Date(), 'error');
     expect(result).toStrictEqual(null);
   });
 });
