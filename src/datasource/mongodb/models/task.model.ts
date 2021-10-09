@@ -1,4 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
+import ImageDto from '../../../core/dto/image.dto';
 import TaskDto from '../../../core/dto/task.dto';
 
 export interface ITask extends Document, TaskDto {}
@@ -31,6 +32,10 @@ const taskSchema = new Schema({
     required: false,
     lowercase: false,
     trim: false
+  },
+  image: {
+    type: [Object],
+    required: false
   }
 });
 

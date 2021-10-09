@@ -45,7 +45,7 @@ export const getByDateRange = async (
     return res
       .status(201)
       .json({ 
-        data: data
+        data
       });
   } catch (err) {
     return res
