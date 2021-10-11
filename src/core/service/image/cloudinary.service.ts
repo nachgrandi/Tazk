@@ -1,11 +1,12 @@
 import { v2 } from 'cloudinary';
+import config from '../../../config/config';
 
 const cloudinary = v2;
 
 cloudinary.config({
-    cloud_name: 'tazk-app',
-    api_key: '746573947883533',
-    api_secret: 'zwyiUuMtF-ygzJGuYe4_kFfP284'
+    cloud_name: config.cloud_name,
+    api_key: config.api_key,
+    api_secret: config.api_secret
 });
 
 
