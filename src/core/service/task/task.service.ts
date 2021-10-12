@@ -15,8 +15,7 @@ export const createTask = (
 
   const res = await taskRepository.save(taskToCreate);
 
-  if ( !res )
-    throw new Error('An error occurred trying to create the task.');
+  if ( !res ) throw new Error('An error occurred trying to create the task.');
   
   return;
 };

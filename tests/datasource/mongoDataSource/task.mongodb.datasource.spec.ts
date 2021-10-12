@@ -9,7 +9,8 @@ const task: TaskDto = {
   userId: '123123',
   dateCreated: new Date('2021-01-01'),
   description: '',
-  category: 'error'
+  category: 'error',
+  image: null
 };
 
 describe('TaskDataSource - ', () => {
