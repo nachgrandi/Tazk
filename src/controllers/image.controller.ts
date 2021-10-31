@@ -43,14 +43,13 @@ export const deleteImage = async (
 
   try {
     const data = await ImageService.deleteImage(req.body.publicId);
-    return res.status(201).json({ data });
+    return res.status(201).json({ msg: 'Image deleted successfully.' });
   } catch (error) {
 
     if (error instanceof BaseError)
       return res
         .status(error.statusCode)
         .json({ msg: error.message });
-
     return res
       .status(500)
       .json({ msg: 'A problem occurred trying to delete the image.' });
