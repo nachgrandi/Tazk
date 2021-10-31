@@ -23,7 +23,7 @@ const taskSchema = new Schema({
     lowercase: false,
     trim: false
   },
-  dateCreated: {
+  date: {
     type: Date,
     required: true
   },
@@ -35,6 +35,14 @@ const taskSchema = new Schema({
   },
   image: {
     type: [Object],
+    required: false
+  },
+  sentNotification: {
+    type: Boolean,
+    required: false
+  },
+  notificationDate: {
+    type: Date,
     required: false
   }
 });

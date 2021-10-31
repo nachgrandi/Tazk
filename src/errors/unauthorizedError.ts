@@ -2,9 +2,9 @@ import BaseError from './baseError';
 
 class UnauthorizedError extends BaseError {
   constructor (
-    statusCode = 401,
     description = 'Unauthorized client.',
   ) {
+    const statusCode = 401;
     super(statusCode, description);
   }
 }

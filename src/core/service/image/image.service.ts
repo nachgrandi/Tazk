@@ -1,5 +1,5 @@
 import ImageDto from '../../dto/image.dto';
-import cloudinary from './cloudinary.service';
+import { cloudinaryService } from '../cloudinary/index';
 import fs from 'fs';
 
 const uploadImage =  async ( 
@@ -7,7 +7,7 @@ const uploadImage =  async (
 ) => {
   const imagePath = path;
         
-  const result = await cloudinary.upload(imagePath);
+  const result = await cloudinaryService.upload(imagePath);
 
   await fs.unlink(imagePath, (err) => {
     if (err) throw err;
@@ -24,7 +24,7 @@ const uploadImage =  async (
 const deleteImage =  async ( 
   publicId: string
 ) => {     
-  return await cloudinary.delete(publicId);
+  return await cloudinaryService.delete(publicId);
 };
 
 export const ImageService = {

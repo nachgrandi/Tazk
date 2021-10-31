@@ -8,6 +8,7 @@ class BaseError extends Error {
     Object.setPrototypeOf(this, new.target.prototype);
     this.statusCode = statusCode;
     Error.captureStackTrace(this);
+    console.error(this.stack)
   }
  }
  

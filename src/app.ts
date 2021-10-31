@@ -4,6 +4,7 @@ import morgan from 'morgan';
 
 import userRoutes from './routes/users.routes';
 import taskRoutes from './routes/tasks.routes';
+import notificationRoutes from './routes/notifications.routes';
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.get('/', (req, res) => {
 
 app.use(userRoutes);
 app.use(taskRoutes);
+app.use(notificationRoutes);
 
 export default app;

@@ -21,7 +21,7 @@ export const oAuth =  async (
         idToken: idToken,
         audience: config.mobileClientId,
     }).catch((e) => {
-      throw new UnauthorizedError(401, e.message);
+      throw new UnauthorizedError(e.message);
     });
 
     const payload = ticket.getPayload();
@@ -33,7 +33,7 @@ export const oAuth =  async (
 
     next();
   } catch (error) {
-    console.error(error);
+
     if (error instanceof UnauthorizedError) {
       return res
         .status(error.statusCode)

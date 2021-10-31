@@ -1,26 +1,31 @@
 import { Request, Response } from 'express';
 import TaskDto from '../core/dto/task.dto';
 import TaskService from '../core/service/task';
+import BadRequestError from '../errors/badRequestError';
+import BaseError from '../errors/baseError';
 
 export const create = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
  
-  if (!isBodyValid(req.body)) {
-    return res
-      .status(400)
-      .json({ msg: 'The field email, title and date are necesary.' });
-  }
+  if (!isBodyValid(req.body))
+    throw new BadRequestError('The field email, title and date are necesary.');
 
   try {
     await TaskService.createTask(req.body, res.locals.userEmail);
 
     return res.status(201).json({ msg: 'Task created successfully.' });
-  } catch (err) {
+  } catch (error) {
+    
+    if (error instanceof BaseError)
+      return res
+        .status(error.statusCode)
+        .json({ msg: error.message });
+
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to create the task.' });
+      .json({ msg: 'Internal error occurred trying to create the task.' });
   }
 };
 
@@ -30,9 +35,7 @@ export const getByDateRange = async (
 ): Promise<Response> => {
   const params = req.query;
   if (!params || !params.startDate || !params.endDate)
-    return res
-      .status(400)
-      .json({ msg: 'The params email, start date and end date are necesary.' });
+    throw new BadRequestError('The params email, start date and end date are necesary.');
 
   
   try {
@@ -47,10 +50,16 @@ export const getByDateRange = async (
       .json({ 
         data
       });
-  } catch (err) {
+  } catch (error) {
+    
+    if (error instanceof BaseError)
+      return res
+        .status(error.statusCode)
+        .json({ msg: error.message });
+    
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to get tasks.' });
+      .json({ msg: 'Internal error occurred trying to get tasks.' });
   }
 };
 
@@ -59,20 +68,23 @@ export const update = async (
   res: Response
 ): Promise<Response> => {
 
-  if ( !req.body || !isBodyValid(req.body) || !req.body._id ) {
-    return res
-      .status(400)
-      .json({ msg: 'The field _id, email, title and dateCreated are necesary.' });
-  }
+  if ( !req.body || !isBodyValid(req.body) || !req.body._id ) 
+    throw new BadRequestError('The field _id, email, title and dateCreated are necesary.');
 
   try {
     await TaskService.updateTask(req.body, req.body._id);
 
     return res.status(201).json({ msg: 'Task updated successfully.' });
-  } catch (err) {
+  } catch (error) {
+    
+    if (error instanceof BaseError)
+      return res
+        .status(error.statusCode)
+        .json({ msg: error.message });
+    
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to update the task.' });
+      .json({ msg: 'Internal error occurred trying to update the task.' });
   }
 };
 
@@ -92,16 +104,22 @@ export const deleteTask = async (
     await TaskService.deleteTask(id);
 
     return res.status(201).json({ msg: 'Task deleted successfully.' });
-  } catch (err) {
+  } catch (error) {
+    
+    if (error instanceof BaseError)
+      return res
+        .status(error.statusCode)
+        .json({ msg: error.message });
+    
     return res
       .status(500)
-      .json({ msg: 'A problem occurred trying to delete the task.' });
+      .json({ msg: 'Internal error occurred trying to delete the task.' });
   }
 };
 
 const isBodyValid = (tazk: TaskDto) => {
 
-  if (!tazk.title || !tazk.dateCreated) {
+  if (!tazk.title || !tazk.date) {
     return false;
   }
 

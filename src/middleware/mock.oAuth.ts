@@ -7,8 +7,6 @@ export const mockAuth =  async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.headers.idtoken);
-
     if (!req.headers || !req.headers.idtoken )
       throw new UnauthorizedError();
 
