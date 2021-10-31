@@ -1,12 +1,14 @@
 import ImageDto from './image.dto';
 
-interface TaskDto {
+interface TaskDto{
   userId: string
-  dateCreated: Date
+  date: Date
   title: string
   description: string
   category: string
   image: [ImageDto] | null
+  sentNotification: boolean
+  notificationDate: Date
 }
 
 export default TaskDto;

@@ -11,12 +11,9 @@ const userSchema = new Schema({
     lowercase: true,
     trim: true
   },
-  showNotification: {
-    type: Boolean,
-    required: false
-  },
-  timeNotification: {
-    type: Number,
+  registrationToken: {
+    type: String,
+    unique: true,
     required: false
   }
 });

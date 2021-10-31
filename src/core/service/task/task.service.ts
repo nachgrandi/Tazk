@@ -12,12 +12,9 @@ export const createTask = (
   const userId = await userRepository.getIdByEmail(email);
 
   taskToCreate.userId = userId;
+  taskToCreate.sentNotification = false;
 
-  const res = await taskRepository.save(taskToCreate);
-
-  if ( !res ) throw new Error('An error occurred trying to create the task.');
-  
-  return;
+  await taskRepository.save(taskToCreate);
 };
 
 export const getByDateRange = ( 
@@ -32,31 +29,16 @@ export const getByDateRange = (
     return taskRepository.getByDateRangeAndCategory(userId, startDate, endDate, category);
 
   return taskRepository.getByDateRange(userId, startDate, endDate);
-  
 };
 
 export const updateTask = ( taskRepository: TaskRepository ) => async ( 
   taskToCreate: TaskDto, id: string
 ) => {
-
-  const res = await taskRepository.update(taskToCreate, id);
-
-  if ( !res )
-    throw new Error('An error occurred trying to update the task.');
-  
-  return;
-  
+  await taskRepository.update(taskToCreate, id);
 };
 
 export const deleteTask = ( taskRepository: TaskRepository ) => async ( 
   id: string 
 ) => {
-
-  const res = await taskRepository.delete(id);
-
-  if ( !res )
-    throw new Error('An error occurred trying to delete the task.');
-  
-  return;
-  
+  await taskRepository.delete(id);
 };

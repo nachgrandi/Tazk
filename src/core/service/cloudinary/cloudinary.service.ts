@@ -4,9 +4,9 @@ import config from '../../../config/config';
 const cloudinary = v2;
 
 cloudinary.config({
-    cloud_name: config.cloud_name,
-    api_key: config.api_key,
-    api_secret: config.api_secret
+    cloud_name: config.cloudName,
+    api_key: config.apiKey,
+    api_secret: config.apiSecret
 });
 
 

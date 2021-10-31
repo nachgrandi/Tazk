@@ -1,8 +1,7 @@
 
 interface UserDto {
   email: string
-  showNotification: boolean
-  timeNotification: number
+  registrationToken: string
 }
 
 export default UserDto;

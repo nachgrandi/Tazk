@@ -2,9 +2,9 @@ import BaseError from './baseError';
 
 class ElementNotFoundError extends BaseError {
   constructor (
-    statusCode = 404,
     description = 'Element not found.',
   ) {
+    const statusCode = 404;
     super(statusCode, description);
   }
 }

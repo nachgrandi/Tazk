@@ -1,22 +1,52 @@
-
+import BaseError from '../../../errors/baseError';
+import DataSourceError from '../../../errors/dataSourceError';
+import ElementNotFoundError from '../../../errors/elementNotFoundError';
 import UserDto from '../../dto/user.dto';
 import UserRepository from '../../repository/user.repository';
 
 export const signInOrSignUp = ( userRepository : UserRepository ) => async ( 
-  email : string 
+  email: string,
+  registrationToken: string
 ) => {
 
   const userToCreate: UserDto = {
     email,
-    showNotification: false,
-    timeNotification: 0
+    registrationToken
   };
 
-  const user: UserDto | null = await userRepository.getByEmail( userToCreate.email );
+  try {
+    
+    const user: string = await userRepository.getIdByEmail( userToCreate.email );
 
-  if (user)
-    return true;
+    return userRepository.update(userToCreate, user);
 
-  return userRepository.save(userToCreate);
+  } catch (error) {
+    
+    if (error instanceof ElementNotFoundError) {
+       return userRepository.save(userToCreate);
+    }
+
+    if (error instanceof DataSourceError) {
+      throw new DataSourceError(error.message);
+    }
+
+    throw new BaseError(500, 'Unexpected error');
+    
+  }
+  
+};
+
+export const updateRegistrationToken = ( userRepository : UserRepository ) => async ( 
+  email: string,
+  registrationToken: string
+) => {
+
+  const userToUpdate: UserDto = {
+    email,
+    registrationToken
+  };
+
+  const userId: string = await userRepository.getIdByEmail( userToUpdate.email );
+  return userRepository.update(userToUpdate, userId);
   
 };

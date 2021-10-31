@@ -1,8 +1,31 @@
 import TaskDto from '../../core/dto/task.dto';
 import TaskRepository from '../../core/repository/task.repository';
-import Task from './models/task.model';
+import DataSourceError from '../../errors/dataSourceError';
+import Task, { ITask } from './models/task.model';
 
 export default class mongoDataSource implements TaskRepository {
+
+  async getNextNotifications(rangeTime: Date): Promise<ITask[] | null> {
+    try {
+      const now = new Date();
+      const tasks = Task.find(
+        {
+          sentNotification: false,
+          notificationDate: { 
+            $gte: now, 
+            $lte: rangeTime 
+          }
+        }
+      );
+      
+      if (tasks) 
+        return tasks;
+      
+      return null;
+    } catch (error) {
+      throw new DataSourceError("An error ocurred trying to get task for notifications.");
+    }
+  }
 
  
   async getByDateRange(userId: string, startDate: Date, endDate: Date): Promise<TaskDto[] | null> {
@@ -23,8 +46,7 @@ export default class mongoDataSource implements TaskRepository {
       
       return null;
     } catch (error) {
-      console.log(error);
-      return null;
+      throw new DataSourceError("An error ocurred trying to get task for date range.");
     }
       
   }
@@ -48,40 +70,33 @@ export default class mongoDataSource implements TaskRepository {
       
       return null;
     } catch (error) {
-      console.log(error);
-      return null;
+      throw new DataSourceError("An error ocurred trying to get task for date range and category.");
     }
       
   }
 
-  async save (task: TaskDto): Promise<boolean> {
+  async save (task: TaskDto): Promise<void> {
     const newTask = new Task(task);
     try {
       await newTask.save();
-      return true;
     } catch (error) {
-      console.log(error);
-      return false;
+      throw new Error("An error ocurred trying to save task.");
     }
   }
 
-  async update(task: TaskDto, id: string): Promise<boolean> {
+  async update(task: TaskDto, id: string): Promise<void> {
     try {
       await Task.findOneAndUpdate({_id : id}, task);
-      return true;
     } catch (error) {
-      console.error(error);
-      return false;
+      throw new DataSourceError(`An error ocurred trying to update task with id ${id}.`);
     }
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(id: string): Promise<void> {
     try {
       await Task.findOneAndDelete({_id : id});
-      return true;
     } catch (error) {
-      console.error(error);
-      return false;
+      throw new Error(`An error ocurred trying to delete task with id ${id}.`);
     }
   }
 }
