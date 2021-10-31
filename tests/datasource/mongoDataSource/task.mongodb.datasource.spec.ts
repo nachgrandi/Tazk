@@ -10,7 +10,8 @@ const task: TaskDto = {
   dateCreated: new Date('2021-01-01'),
   description: '',
   category: 'error',
-  image: null
+  image: null,
+  sentNotification: false
 };
 
 describe('TaskDataSource - ', () => {
