@@ -17,7 +17,7 @@ const key = {
   authProviderX509CertUrl: "https://www.googleapis.com/oauth2/v1/certs",
   clientX509CertUrl: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-s7kud%40tazk-1630450146860.iam.gserviceaccount.com"
 }
-
+console.log(`key`, key)
 const environment: string = process.env.NODE_ENV || 'dev';
 if (environment !== 'dev')
   admin.initializeApp({
