@@ -43,7 +43,7 @@ export const deleteImage = async (
 
   try {
     const data = await ImageService.deleteImage(req.body.publicId);
-    return res.status(201).json({ msg: data });
+    return res.status(201).json({  data });
   } catch (error) {
 
     if (error instanceof BaseError)
