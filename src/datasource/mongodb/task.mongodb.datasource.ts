@@ -34,7 +34,7 @@ export default class mongoDataSource implements TaskRepository {
       const tasks = Task.find(
         {
           userId: userId,
-          dateCreated: { 
+          date: { 
             $gte: startDate, 
             $lte: endDate 
           }
@@ -57,7 +57,7 @@ export default class mongoDataSource implements TaskRepository {
       const tasks = Task.find(
         {
           userId: userId,
-          dateCreated: { 
+          date: { 
             $gte: startDate, 
             $lte: endDate 
           },
