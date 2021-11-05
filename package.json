@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "notification": "node dist/core/service/notifications/index.js",
+    "notification": "node dist/notification.js",
     "build": "tsc",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "devNotification": "tsc-watch --onSuccess \"node dist/notification.js\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lintfix": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "jest"

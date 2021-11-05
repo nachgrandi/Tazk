@@ -14,7 +14,7 @@ export const fetchAndSentNotifications = (
 
   rangeTime.setHours(hours);
   rangeTime.setMinutes(minutes);
-
+  console.log(`pepe`)
   const tasks: ITask[] | null = await taskRepository.getNextNotifications(rangeTime);
   console.log(`tasks`, tasks, rangeTime)
   if (tasks)

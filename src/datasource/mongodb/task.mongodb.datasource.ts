@@ -1,3 +1,4 @@
+import { CLOUD_SDK_CLIENT_ID } from 'google-auth-library/build/src/auth/googleauth';
 import TaskDto from '../../core/dto/task.dto';
 import TaskRepository from '../../core/repository/task.repository';
 import DataSourceError from '../../errors/dataSourceError';
@@ -11,7 +12,6 @@ export default class mongoDataSource implements TaskRepository {
       const hours = now.getHours() -3;
 
       now.setHours(hours);
-
       const tasks = Task.find(
         {
           sentNotification: false,

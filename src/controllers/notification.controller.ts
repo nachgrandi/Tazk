@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-//import NotificationService from '../core/service/notifications';
+import NotificationService from '../core/service/notifications';
 import BaseError from '../errors/baseError';
 
 export const sentNotification = async (
@@ -9,7 +9,7 @@ export const sentNotification = async (
 
   try {
     
-    //await NotificationService.fetchAndSentNotifications();
+    await NotificationService.fetchAndSentNotifications();
   
     return res.status(201).json({ msg: 'All notifications were sent.' });
   } catch (error) {

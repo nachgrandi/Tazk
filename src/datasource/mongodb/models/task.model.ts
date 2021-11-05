@@ -1,5 +1,4 @@
 import { model, Schema, Document } from 'mongoose';
-import ImageDto from '../../../core/dto/image.dto';
 import TaskDto from '../../../core/dto/task.dto';
 
 export interface ITask extends Document, TaskDto {}
