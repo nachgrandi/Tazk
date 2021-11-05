@@ -12,6 +12,7 @@ export const fetchAndSentNotifications = (
   const minutes = rangeTime.getMinutes() + 10;
 
   rangeTime.setMinutes(minutes);
+  rangeTime.setUTCHours(-3);
 
   const tasks: ITask[] | null = await taskRepository.getNextNotifications(rangeTime);
   console.log(`tasks`, tasks, rangeTime)

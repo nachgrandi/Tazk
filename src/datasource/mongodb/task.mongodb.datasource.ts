@@ -8,6 +8,8 @@ export default class mongoDataSource implements TaskRepository {
   async getNextNotifications(rangeTime: Date): Promise<ITask[] | null> {
     try {
       const now = new Date();
+      now.setUTCHours(-3);
+      
       const tasks = Task.find(
         {
           sentNotification: false,
