@@ -14,7 +14,7 @@ export const fetchAndSentNotifications = (
   rangeTime.setMinutes(minutes);
 
   const tasks: ITask[] | null = await taskRepository.getNextNotifications(rangeTime);
-
+  console.log(`tasks`, tasks, rangeTime)
   if (tasks)
     tasks.map(
       (x) => sendNotification(taskRepository, userRepository)(x)
