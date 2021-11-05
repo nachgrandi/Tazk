@@ -26,7 +26,7 @@ const sendNoticationToFirebase = (
   taskRepository: TaskRepository,
   userRepository: UserRepository
 ) => async (task: ITask) => {
-
+  console.log(`notification`, task.userId)
   const user: UserDto | null = await userRepository.getById(task.userId);
 
   if (user) {
