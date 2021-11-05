@@ -5,6 +5,8 @@ import UserMongoDataSource from '../../../datasource/mongodb/user.mongodb.dataso
 const taskRepository = new TaskRepository();
 const userRepository = new UserMongoDataSource();
 
-export default class NotificationService {
+class NotificationService {
   static fetchAndSentNotifications = fetchAndSentNotifications(taskRepository, userRepository);
 }
+
+NotificationService.fetchAndSentNotifications();

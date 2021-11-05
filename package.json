@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
+    "notification": "node dist/core/service/notifications/index.js",
     "build": "tsc",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
