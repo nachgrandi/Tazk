@@ -3,4 +3,4 @@ import sendNotificationToFirebase from './firebase.service';
 
 const environment: string = process.env.NODE_ENV || 'dev';
 
-export const sendNotification = environment == 'dev' ? sendNotificationToFirebase : sendNotificationToFirebase;
+export const sendNotification = environment == 'dev' ? mockSendNotification : sendNotificationToFirebase;
