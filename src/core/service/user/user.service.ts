@@ -21,8 +21,9 @@ export const signInOrSignUp = ( userRepository : UserRepository ) => async (
     return userRepository.update(userToCreate, user);
 
   } catch (error) {
-    
+    console.log('error')
     if (error instanceof ElementNotFoundError) {
+      console.log(`error`, error)
        return userRepository.save(userToCreate);
     }
 

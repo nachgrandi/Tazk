@@ -26,10 +26,15 @@ export default class mongoDataSource implements userRepository {
       const user = await User.findOne({ email: email });
       
       if (!user) 
-        throw new ElementNotFoundError('User id by email not found');
+        throw new ElementNotFoundError(`User id by email: ${email} not found`);
         
       return user._id
     } catch (error) {
+
+      if (error instanceof ElementNotFoundError) {
+        throw new ElementNotFoundError(error.message);
+      }
+  
       throw new DataSourceError(`An error ocurred trying to get user id with email ${email}`);
     }
   }
