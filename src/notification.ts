@@ -1,10 +1,10 @@
-import NotificationService from './core/service/notifications';
-import app from './app';
-import './database/mongodb.database';
+import axios from 'axios';
 
-
-const sentNotificationAsync = async () => {
-  await NotificationService.fetchAndSentNotifications();
-}
-
-sentNotificationAsync();
+axios
+  .post('https://tazk-app.herokuapp.com/notifications')
+  .then((res) => {
+    console.log(`statusCode: ${res.status}, ${res.data.msg}`)
+  })
+  .catch(error => {
+    console.error(error)
+  })

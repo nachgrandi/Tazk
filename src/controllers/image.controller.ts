@@ -16,7 +16,7 @@ export const uploadImage = async (
   try {
     const data = await ImageService.uploadImage(req.file?.path);
 
-    return res.status(201).json({ data });
+    return res.status(201).json({ msg: data });
   } catch (error) {
     
     if (error instanceof BaseError)
