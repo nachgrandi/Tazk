@@ -5,7 +5,7 @@ import mongoDataSource from '../../../src/datasource/mongodb/user.mongodb.dataso
 const dataSource = new mongoDataSource();
 const user: UserDto = {
   email: 'some@mail.com',
-  deviceId: "qwe"
+  registrationToken: 'asd'
 };
 const createUserService = signInOrSignUp(dataSource);
 
@@ -13,12 +13,12 @@ describe('UserService - singUp', () => {
   test('Test login and create user successfully', async () => {
     dataSource.save = jest.fn().mockReturnValue(true);
     dataSource.getByEmail = jest.fn().mockReturnValue(null);
-    const result = await createUserService(user.email, user.deviceId);
+    const result = await createUserService(user.email, user.registrationToken);
     expect(result).toBe(true);
   });
   test('Test login user successfully', async () => {
     dataSource.getByEmail = jest.fn().mockReturnValue(user);
-    const result = await createUserService(user.email, user.deviceId);
+    const result = await createUserService(user.email, user.registrationToken);
     expect(result).toBe(true);
   });
 });

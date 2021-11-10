@@ -6,7 +6,11 @@ import ElementNotFoundError from '../../src/errors/elementNotFoundError';
 describe('POST - signInOrSignUp', () => {
   test('Test create user successfully', async () => {
     UserService.signInOrSignUp = jest.fn().mockReturnValue(true);
-    const req = getMockReq();
+    const req = getMockReq({
+      body: { 
+        registration_token: 'qwe'
+      }
+    });
     const { res } = getMockRes({
       locals: {
         userEmail: 'test@test.com'
@@ -26,7 +30,11 @@ describe('POST - signInOrSignUp', () => {
 
   test('Test create user fails trying to save user', async () => {
     UserService.signInOrSignUp = jest.fn().mockReturnValue(false);
-    const req = getMockReq();
+    const req = getMockReq({
+      body: { 
+        registration_token: 'qwe'
+      }
+    });
     const { res } = getMockRes({
       locals: {
         userEmail: 'test@test.com'
@@ -46,7 +54,11 @@ describe('POST - signInOrSignUp', () => {
 
   test('Test create user throw error', async () => {
     UserService.signInOrSignUp = jest.fn().mockRejectedValue(new Error());
-    const req = getMockReq();
+    const req = getMockReq({
+      body: { 
+        registration_token: 'qwe'
+      }
+    });
     const { res } = getMockRes();
 
     await signInOrSignUp(req, res).then(

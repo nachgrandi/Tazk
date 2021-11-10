@@ -5,7 +5,7 @@ import mongoDataSource from '../../../src/datasource/mongodb/user.mongodb.dataso
 const dataSource = new mongoDataSource();
 const user: UserDto = {
   email: 'some@mail.com',
-  deviceId: "qwe"
+  registrationToken: "qwe"
 };
 
 describe('UserDataSource - ', () => {

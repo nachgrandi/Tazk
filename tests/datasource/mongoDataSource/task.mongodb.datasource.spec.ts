@@ -7,11 +7,12 @@ const dataSource = new mongoDataSource();
 const task: TaskDto = {
   title: 'some title',
   userId: '123123',
-  dateCreated: new Date('2021-01-01'),
+  date: new Date('2021-01-01'),
   description: '',
   category: 'error',
   image: null,
-  sentNotification: false
+  sentNotification: false,
+  notificationDate: new Date('2021-01-01')
 };
 
 describe('TaskDataSource - ', () => {

@@ -16,7 +16,7 @@ export const uploadImage = async (
   try {
     const data = await ImageService.uploadImage(req.file?.path);
 
-    return res.status(201).json({ msg: data });
+    return res.status(201).json({ data });
   } catch (error) {
     
     if (error instanceof BaseError)
@@ -43,6 +43,7 @@ export const deleteImage = async (
 
   try {
     const data = await ImageService.deleteImage(req.body.publicId);
+    console.log(`data`, data, { msg: data })
     return res.status(201).json({ msg: data });
   } catch (error) {
 
